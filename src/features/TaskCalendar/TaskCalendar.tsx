@@ -3,22 +3,29 @@ import { QuarterChooser } from './QuarterChooser/QuarterChooser';
 import { TaskTable } from './TaskTable/TaskTable';
 import './taskCalendar.css';
 import { YearQuarter } from '../../types/Quarter/YearQuarter';
-import { QuarterNumbers } from 'luxon';
+import { DateTime } from 'luxon';
+import { TaskProvider } from '../../context/taskContext';
 
+/**
+ * A component that displays a calendar view of tasks by quarter.
+ *
+ * @return {JSX.Element} The rendered calendar view of tasks.
+ */
 export const TaskCalendar = () => {
   const [yearQuarter, setYearQuarter] = useState<YearQuarter>({
-    year: 2023,
-    quarter: 1,
+    quarter: DateTime.now().quarter,
+    year: DateTime.now().year,
   });
 
-  const handleQuarterChange = (newYear: number, newQuarter: QuarterNumbers) => {
-    setYearQuarter({ year: newYear, quarter: newQuarter });
-  };
-
   return (
-    <div className="calendarContainer">
-      <QuarterChooser onQuarterChange={handleQuarterChange} />
-      <TaskTable yearQuarter={yearQuarter} />
-    </div>
+    <TaskProvider>
+      <div className="calendarContainer">
+        <QuarterChooser
+          yearQuarter={yearQuarter}
+          setYearQuarter={setYearQuarter}
+        />
+        <TaskTable yearQuarter={yearQuarter} />
+      </div>
+    </TaskProvider>
   );
 };

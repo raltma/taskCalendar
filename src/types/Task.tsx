@@ -1,9 +1,8 @@
-import { DateTime } from 'luxon';
+import { Interval } from 'luxon';
 
 export type Task = {
   id: string;
-  startDate: DateTime;
-  endDate: DateTime;
+  interval: Interval;
   name: string;
   description: string;
 };

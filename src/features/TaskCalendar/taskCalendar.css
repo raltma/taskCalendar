@@ -1,8 +1,6 @@
 .calendarContainer{
-    background-color: black;
     min-width: 600px;
     min-height: 600px;
-    background-color: rgb(43, 43, 43);
     padding: .5rem;
     border-radius: .3rem;
 }

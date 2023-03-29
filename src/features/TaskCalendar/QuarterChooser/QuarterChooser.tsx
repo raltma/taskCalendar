@@ -1,44 +1,46 @@
-import { useState } from 'react';
 import Fab from '@mui/material/Fab';
 import './quarterChooser.css';
-import { DateTime, QuarterNumbers } from 'luxon';
+import { QuarterNumbers } from 'luxon';
+import { YearQuarter } from '../../../types/Quarter/YearQuarter';
+import { Dispatch, SetStateAction } from 'react';
 
 type QuarterChooserProps = {
-  onQuarterChange: (year: number, quarter: QuarterNumbers) => void;
+  yearQuarter: YearQuarter;
+  setYearQuarter: Dispatch<SetStateAction<YearQuarter>>;
 };
 
-export const QuarterChooser = ({ onQuarterChange }: QuarterChooserProps) => {
-  const [quarter, setQuarter] = useState(DateTime.now().quarter);
-  const [year, setYear] = useState(DateTime.now().year);
-
-  const handleQuarterChange = (newYear: number, newQuarter: QuarterNumbers) => {
-    setYear(newYear);
-    setQuarter(newQuarter);
-    onQuarterChange(newYear, newQuarter);
-  };
-
+/**
+ * A component that allows users to choose a year and quarter.
+ *
+ * @param {YearQuarter} yearQuarter - The currently selected year and quarter.
+ * @param {Dispatch<SetStateAction<YearQuarter>>} setYearQuarter - A function to
+ * pass updated year and quarter up.
+ * @returns {JSX.Element} - The QuarterChooser component.
+ */
+export const QuarterChooser = ({
+  yearQuarter,
+  setYearQuarter,
+}: QuarterChooserProps) => {
   const increment = (): void => {
-    let newQuarter = quarter;
-    let newYear = year;
+    let { year, quarter } = yearQuarter;
     if (quarter + 1 > 4) {
-      newQuarter = 1;
-      newYear = year + 1;
+      quarter = 1 as QuarterNumbers;
+      year++;
     } else {
-      newQuarter = (quarter + 1) as QuarterNumbers;
+      quarter = (quarter + 1) as QuarterNumbers;
     }
-    handleQuarterChange(newYear, newQuarter as QuarterNumbers);
+    setYearQuarter({ year, quarter });
   };
 
   const decrement = (): void => {
-    let newQuarter = quarter;
-    let newYear = year;
+    let { year, quarter } = yearQuarter;
     if (quarter - 1 < 1) {
-      newQuarter = 4;
-      newYear = year - 1;
+      quarter = 4 as QuarterNumbers;
+      year = year - 1;
     } else {
-      newQuarter = (quarter - 1) as QuarterNumbers;
+      quarter = (quarter - 1) as QuarterNumbers;
     }
-    handleQuarterChange(newYear, newQuarter as QuarterNumbers);
+    setYearQuarter({ year, quarter });
   };
 
   return (
@@ -47,8 +49,8 @@ export const QuarterChooser = ({ onQuarterChange }: QuarterChooserProps) => {
         &lt;
       </Fab>
       <div className="textContainer">
-        <div>{year}</div>
-        Quarter {quarter}
+        <div>{yearQuarter.year}</div>
+        Quarter {yearQuarter.quarter}
       </div>
       <Fab size="medium" onClick={increment} color="primary">
         &gt;

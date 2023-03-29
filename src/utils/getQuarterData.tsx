@@ -1,6 +1,6 @@
-import { DateTime, QuarterNumbers, WeekNumbers } from 'luxon';
-import { Quarter } from '../../../types/Quarter/Quarter';
-import { QuarterMonth } from '../../../types/Quarter/QuarterMonth';
+import { DateTime, Interval, QuarterNumbers, WeekNumbers } from 'luxon';
+import { Quarter } from '../types/Quarter/Quarter';
+import { QuarterMonth } from '../types/Quarter/QuarterMonth';
 
 function getLastWeekOfYear(year: number): WeekNumbers {
   const lastDay = DateTime.fromObject({ year }).endOf('year');
@@ -57,8 +57,15 @@ export function getQuarterData(year: number, quarter: QuarterNumbers): Quarter {
       months.push(monthWithWeeks);
       monthWithWeeks = { month, weeks: [] };
     }
-    monthWithWeeks.weeks.push({ week, startDate: weekStart, endDate: weekEnd });
+    const weekInterval = Interval.fromDateTimes(weekStart, weekEnd);
+    monthWithWeeks.weeks.push({ week, interval: weekInterval });
   }
   if (monthWithWeeks.month <= endMonth.month) months.push(monthWithWeeks);
-  return { quarter, year, months };
+  const quarterEnd = months.at(-1)?.weeks.at(-1)?.interval.end;
+  const quarterStart = months[0]?.weeks[0]?.interval.start;
+  let quarterInterval;
+  if (quarterEnd !== undefined && quarterStart !== undefined) {
+    quarterInterval = Interval.fromDateTimes(quarterStart, quarterEnd);
+  }
+  return { quarter, year, months, quarterInterval };
 }

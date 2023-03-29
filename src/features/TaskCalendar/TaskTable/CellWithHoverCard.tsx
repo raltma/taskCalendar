@@ -2,11 +2,20 @@ import { Card, CardContent } from '@mui/material';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import { Task } from '../../../../../../types/Task';
+import { dateFormat } from '../../../globals';
+import { Task } from '../../../types/Task';
 
 type CellWithHoverCardProps = {
   task: Task;
 };
+
+/**
+ *Represents a cell in a table with a hoverable card displaying task details.
+ *
+ *@param {Task} props.task - The task object containing the task data to be displayed
+ *   on the card.
+ *@returns {JSX.Element} - A JSX element containing a table cell with a hoverable card.
+ */
 
 export default function CellWithHoverCard({ task }: CellWithHoverCardProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -49,9 +58,9 @@ export default function CellWithHoverCard({ task }: CellWithHoverCardProps) {
             <Typography variant="h5" gutterBottom>
               {task?.name}
             </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              {task?.startDate.toLocaleString()} -{' '}
-              {task?.endDate.toLocaleString()}
+            <Typography sx={{}} color="text.secondary">
+              {task?.interval.start.toFormat(dateFormat)} -{' '}
+              {task?.interval.end.toFormat(dateFormat)}
             </Typography>
             <Typography variant="body1" gutterBottom>
               {task?.description}

@@ -1,14 +1,56 @@
-
-table{
-    width: 100%;
-    border-collapse: collapse;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
+  background-color: #132d3f;
 }
-td{
-    width: 5rem;
-    height: 2rem;
-    border: 2px solid white;
-    border-collapse: collapse;
+/* Remove outside border from the table */
+table tr:first-child td {
+  border-top: 0;
 }
-.hasTask{
-    background-color: darkolivegreen;
+table tr td:first-child {
+  border-left: 0;
+}
+table tr:last-child td {
+  border-bottom: 0;
+}
+table tr td:last-child {
+  border-right: 0;
+}
+table thead tr:last-child td {
+  border-bottom: black 6px solid;
+}
+/* Make the line between task info and calendar thicker
+  for the weeks row in the header */
+table thead tr:last-child td:nth-child(3) {
+  border-right-width: 6px;
+}
+/* Make the line between task info and calendar thicker
+  for the month row in the header */
+table thead tr:first-child td:nth-child(2) {
+  border-left-width: 6px;
+}
+td {
+  width: 5rem;
+  height: 2rem;
+  padding: 0.3rem;
+  border: black 2px solid;
+}
+thead {
+  background-color: #001d30;
+  border-radius: 5rem;
+}
+.hasTask {
+  background-color: darkolivegreen;
+}
+.clickable:hover {
+  background-color: rgb(85, 85, 85);
+}
+.taskInfoCell {
+  background-color: #364d5c;
+}
+/* Make the line between task info and calendar thicker */
+tr .taskInfoCell:nth-child(3) {
+  border-right-width: 5px;
 }
