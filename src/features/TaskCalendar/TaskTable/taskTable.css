@@ -3,6 +3,7 @@ table {
   border-collapse: collapse;
   border-radius: 1em;
   overflow: hidden;
+  table-layout: fixed;
 }
 /* Remove outside border from the table */
 table tr:first-child td {
@@ -30,11 +31,15 @@ table thead tr:last-child td:nth-child(3) {
 table thead tr:first-child td:nth-child(2) {
   border-left-width: 6px;
 }
+tbody tr td:first-child{
+  width: 10rem;
+}
 td {
   width: 5rem;
   height: 2rem;
   padding: 0.3rem;
   border: black 2px solid;
+  overflow-wrap:break-word;
 }
 thead {
   background-color: #001d30;

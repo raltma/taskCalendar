@@ -29,6 +29,8 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
 };
 
 /**
@@ -82,6 +84,7 @@ export const EditDeleteTask = ({
         <Typography variant="h5" mb={1}>
           Edit task: "{selectedTask?.name}"
         </Typography>
+
         <TaskForm task={task} setTask={setTask} />
         <Button variant="contained" onClick={onEdit}>
           Edit
