@@ -3,7 +3,6 @@ table {
   border-collapse: collapse;
   border-radius: 1em;
   overflow: hidden;
-  background-color: #132d3f;
 }
 /* Remove outside border from the table */
 table tr:first-child td {
@@ -40,6 +39,9 @@ td {
 thead {
   background-color: #001d30;
   border-radius: 5rem;
+}
+tbody{
+  background-color: #132d3f;
 }
 .hasTask {
   background-color: darkolivegreen;
