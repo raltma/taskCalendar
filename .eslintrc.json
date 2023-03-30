@@ -5,7 +5,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "prettier/prettier": ["warn", { "singleQuote": true }],
+    "prettier/prettier": ["warn", { "singleQuote": true, "endOfLine": "auto"  }],
     "no-unused-vars": "off", // or "@typescript-eslint/no-unused-vars": "off",
     "unused-imports/no-unused-imports": "warn",
     "@typescript-eslint/no-unused-vars": [
